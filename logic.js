@@ -4,7 +4,7 @@ queryurl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.ge
 // console.log("it's working")
 // Get marker color based on earthquake magnitude
 function getColor(mag) {
-    if (mag <= 5) {
+    if (mag >= 5) {
         return "rgb(240, 107, 107)" 
     } else {
         if (mag > 4) {
