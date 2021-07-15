@@ -1,5 +1,6 @@
 // Get data url
-queryurl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+queryurl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+
 // console.log("it's working")
 // Get marker color based on earthquake magnitude
 function getColor(mag) {
@@ -18,7 +19,7 @@ function getColor(mag) {
                     if (mag > 1) {
                         return "rgb(226, 243, 77)"
                     } else {
-                        return "rgb(183, 243, 77)"
+                        return "rgbrgb(183, 243, 77)"
                     }
                 }
             }
@@ -56,7 +57,7 @@ function createMap(earthquakes) {
     // Get initial light layer
     var mapLayer = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
       attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-      tileSize: 512,
+      tileSize:512,
       maxZoom: 11,
       zoomOffset: -1,
       id: "mapbox/streets-v10",
@@ -64,7 +65,7 @@ function createMap(earthquakes) {
     });
     // Declare map object and set it to the map element in the DOM
     var myMap = L.map("map", {
-        center: [29.876019, -107.224121],
+        center: [37.5407, -77.4360],
         zoom: 4.5,
         layers: [mapLayer, earthquakes]
     });
