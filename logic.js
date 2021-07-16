@@ -82,7 +82,7 @@ function createMap(earthquakes) {
             "rgb(240, 107, 107)"];
         var labels = [];
 
-        var legendInfo = "<h1>Earthquake intensity<h1>" + 
+        var legendInfo = "<h1>Earthquake Intensity<h1>" + 
             "<div class=\"labels\">" +
                 "<div class=\"max\">5+</div>" +
                 "<div class=\"fourth\">4-5</div>" +
