@@ -29,20 +29,21 @@ function getColor(mag) {
 
 // Declare function to create map features.
 function createFeatures(earthquakeData) {
-    // Create popup layers using earthquake title, type and magnitude
+    // Create popup layers using earthquake title, type and magnitude, and depth
     function onEachFeature(feature, layer) {
         layer.bindPopup("<p>" + feature.properties.title + "</p>" +
             "<p>Type: " + feature.properties.type + "</p>" +
-            "<p>Magnitude: " + feature.properties.mag + "</p>");
+            "<p>Magnitude: " + feature.properties.mag + "</p>" +
+            "<p>" + "Depth: " + feature.geometry.coordinates[2] + "</p>");
     }
     //Create circle markers for each earthquake in the data set.
     var earthquakes = L.geoJSON(earthquakeData, {
         pointToLayer: function(feature, latlng) {
-            // Make circle radius dependent on the magnitude and get color based on the same feature
+            // Make circle radius dependent on the magnitude and get color based on the depth
             return new L.CircleMarker(latlng, {
                 radius: feature.properties.mag * 5,
                 fillOpacity: 1,
-                color: getColor(feature.properties.mag)
+                color: getColor(feature.geometry.coordinates[2])
             })
         },
         // Append popups on each feature
@@ -82,7 +83,7 @@ function createMap(earthquakes) {
             "rgb(240, 107, 107)"];
         var labels = [];
 
-        var legendInfo = "<h1>Earthquake Intensity<h1>" + 
+        var legendInfo = "<h1>Earthquake Depth<h1>" + 
             "<div class=\"labels\">" +
                 "<div class=\"max\">5+</div>" +
                 "<div class=\"fourth\">4-5</div>" +
