@@ -1,7 +1,6 @@
 // Get data url
 queryurl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
 
-faultLinesURL = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
 
 // console.log("it's working")
 // Get marker color based on earthquake magnitude
@@ -63,7 +62,7 @@ function createMap(earthquakes) {
       tileSize:512,
       maxZoom: 11,
       zoomOffset: -1,
-      id: "mapbox/streets-v10",
+      id: "mapbox/satellite-v9",
       accessToken: API_KEY
     });
     
@@ -73,6 +72,16 @@ function createMap(earthquakes) {
         zoom: 4.5,
         layers: [mapLayer, earthquakes]
     });
+
+    //create plate lines
+    d3.json("https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json").then(function(plateData) {
+        L.geoJSON(plateData, {
+            color:"orange",
+            weight: 1.5
+        })
+            .addTo(myMap);
+    });
+
     // Create a legend for the map based on the earthquakes data and colors
     var legend = L.control({position: "bottomright"});
     legend.onAdd = function() {
@@ -117,8 +126,3 @@ d3.json(queryurl).then(function(data) {
     createFeatures(data.features)
 });
 
-//Get fault lines data
-d3.json(faultLinesURL, function(data) {
-    // Stores response into faultLineData
-    createFeatures(fault= data)
-});
